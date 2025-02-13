@@ -9,5 +9,6 @@ namespace DataAccess.Repository
         Task<News> GetNews(int id);
         Task<List<News>> GetAllNews();
         Task DeleteNews(int id);
+        Task UpdateNews(News news);
     }
 }

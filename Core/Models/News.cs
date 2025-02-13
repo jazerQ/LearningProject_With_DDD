@@ -9,7 +9,7 @@ namespace Core.Models
 {
     public class News
     {
-        public const int MAX_LENGTH_TITLE = 32;
+        public const int MAX_LENGTH_TITLE = 100;
         private readonly List<Image> _news = new();
         public News(int id, string title, string textData, DateTime createdDate, Image? image, int views = 0)
         {

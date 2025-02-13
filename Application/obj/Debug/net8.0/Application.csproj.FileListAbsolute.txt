@@ -15,3 +15,4 @@ C:\Users\jazer\source\repos\EFcoreLearningProject\Application\obj\Debug\net8.0\A
 C:\Users\jazer\source\repos\EFcoreLearningProject\Application\obj\Debug\net8.0\refint\Application.dll
 C:\Users\jazer\source\repos\EFcoreLearningProject\Application\obj\Debug\net8.0\Application.pdb
 C:\Users\jazer\source\repos\EFcoreLearningProject\Application\obj\Debug\net8.0\ref\Application.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\Application\obj\Debug\net8.0\Application.sourcelink.json

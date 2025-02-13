@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application;
+using Core.Exceptions;
 using Core.Models;
 using DataAccess.Configurations;
 using DataAccess.Entities;
@@ -81,9 +82,28 @@ namespace DataAccess.Repository
         }
         public async Task DeleteNews(int id) 
         {
+            if (await _context.News.FirstOrDefaultAsync(n => n.Id == id) == null) 
+            {
+                throw new EntityNotFoundException($"is not found by {id} id");
+            }
             await _context.News.Where(n => n.Id == id).ExecuteDeleteAsync();
             await _imageRepository.DeleteImage(id);
             await _context.SaveChangesAsync();
+        }
+        public async Task UpdateNews(News news) 
+        {
+            if (news.TitleImage != null)
+            {
+                var img = Image.Create(news.TitleImage.Id, news.TitleImage.FileName);
+                if (img.IsFailure) 
+                {
+                    throw new ImageCreationException(img.Error);
+                }
+                await _imageRepository.UpdateImage(img.Value);
+            }
+            await _context.News.Where(n => n.Id == news.Id)
+                            .ExecuteUpdateAsync(c => c.SetProperty(n => n.Title, news.Title)
+                                                      .SetProperty(n => n.TextData, news.TextData));
         }
     }
 }

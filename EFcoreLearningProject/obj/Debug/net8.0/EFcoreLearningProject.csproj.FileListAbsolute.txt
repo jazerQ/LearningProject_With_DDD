@@ -143,3 +143,4 @@ C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debu
 C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Core.dll
 C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Application.pdb
 C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Core.pdb
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\obj\Debug\net8.0\EFcoreLearningProject.sourcelink.json

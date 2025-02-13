@@ -1,4 +1,5 @@
 ﻿using Application;
+using Core.Exceptions;
 using Core.Models;
 using EFcoreLearningProject.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -108,7 +109,11 @@ namespace EFcoreLearningProject.Controllers
                 await _newsService.DeleteNews(id);
                 return Ok();
             }
-            catch (Exception ex) 
+            catch (EntityNotFoundException ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine($"Deleting are invalid, `cause {ex.Message}");
                 return BadRequest(ex.Message);

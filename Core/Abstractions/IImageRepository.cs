@@ -1,4 +1,6 @@
 ﻿
+using Core.Models;
+
 namespace DataAccess.Repository
 {
     public interface IImageRepository
@@ -6,5 +8,6 @@ namespace DataAccess.Repository
         int GetNewId();
         Task WriteImagePathIntoDB(int id, int newsId, string fileName);
         Task DeleteImage(int newsId);
+        Task UpdateImage(Image img);
     }
 }

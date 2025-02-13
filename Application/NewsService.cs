@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.Exceptions;
+using Core.Models;
 using DataAccess.Repository;
 
 namespace Application
@@ -45,7 +46,19 @@ namespace Application
         }
         public async Task DeleteNews(int id) 
         {
-            await _repository.DeleteNews(id);
+            try
+            {
+                await _repository.DeleteNews(id);
+            }
+            catch (EntityNotFoundException notFoundException)
+            {
+                Console.WriteLine($"Oops, we have a small problem {notFoundException.Message}");
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                throw;
+            }
         }
     }
 }

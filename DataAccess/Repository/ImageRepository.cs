@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Models;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,12 @@ namespace DataAccess.Repository
         {
             await _context.Image.Where(i => i.NewsId == newsId).ExecuteDeleteAsync();
             await _context.SaveChangesAsync();
-        } 
+        }
+        public async Task UpdateImage(Image img) 
+        {
+            await _context.Image.Where(i => i.Id == img.Id).ExecuteUpdateAsync(i => i.SetProperty(p => p.FileName, img.FileName));
+            await _context.SaveChangesAsync();
+        }
     }
+
 }
