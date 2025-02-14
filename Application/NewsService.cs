@@ -1,4 +1,5 @@
-﻿using Core.Exceptions;
+﻿using Core.DTO;
+using Core.Exceptions;
 using Core.Models;
 using DataAccess.Repository;
 
@@ -57,6 +58,29 @@ namespace Application
             }
             catch (Exception ex) 
             {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task UpdateNews(NewsUpdateDTO news) 
+        {
+            try
+            {
+                await _repository.UpdateNews(news);
+            }
+            catch (ImageCreationException imgEx)
+            {
+                Console.WriteLine($"Oops, while image dont create {imgEx.Message} ");
+                throw;
+            }
+            catch (EntityNotFoundException ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }

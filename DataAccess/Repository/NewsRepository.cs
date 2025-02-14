@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application;
+using Core.DTO;
 using Core.Exceptions;
 using Core.Models;
 using DataAccess.Configurations;
@@ -87,23 +88,51 @@ namespace DataAccess.Repository
                 throw new EntityNotFoundException($"is not found by {id} id");
             }
             await _context.News.Where(n => n.Id == id).ExecuteDeleteAsync();
-            await _imageRepository.DeleteImage(id);
+            await _imageRepository.DeleteImageByNewsId(id);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateNews(News news) 
+        public async Task UpdateNews(NewsUpdateDTO news) 
         {
-            if (news.TitleImage != null)
+            try
             {
-                var img = Image.Create(news.TitleImage.Id, news.TitleImage.FileName);
-                if (img.IsFailure) 
+                if(await _context.News.FirstOrDefaultAsync(n => n.Id == news.Id) == null) 
+                {
+                    throw new EntityNotFoundException($"Not FOund This news by id {news.Id}");
+                }
+                var img = Image.Create(await _imageRepository.GetImageIdByNews(news.Id), news.TitleImage!.FileName);
+                if (img.IsFailure)
                 {
                     throw new ImageCreationException(img.Error);
                 }
                 await _imageRepository.UpdateImage(img.Value);
+                await _context.News.Where(n => n.Id == news.Id)
+                                .ExecuteUpdateAsync(c => c.SetProperty(n => n.Title, news.Title)
+                                                          .SetProperty(n => n.TextData, news.TextData));
+                await _context.SaveChangesAsync();
             }
-            await _context.News.Where(n => n.Id == news.Id)
-                            .ExecuteUpdateAsync(c => c.SetProperty(n => n.Title, news.Title)
-                                                      .SetProperty(n => n.TextData, news.TextData));
+            catch (NotImageInDbException Ex)
+            {
+                try
+                {
+                    await _imageRepository.WriteImagePathIntoDB(_imageRepository.GetNewId(), news.Id, news.TitleImage!.FileName);
+                    var img = Image.Create(await _imageRepository.GetImageIdByNews(news.Id), news.TitleImage!.FileName);
+                    await _imageRepository.UpdateImage(img.Value);
+                    await _context.News.Where(n => n.Id == news.Id)
+                                .ExecuteUpdateAsync(c => c.SetProperty(n => n.Title, news.Title)
+                                                          .SetProperty(n => n.TextData, news.TextData));
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw;
+                }
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
     }
 }

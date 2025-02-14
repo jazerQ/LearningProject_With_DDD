@@ -6,7 +6,9 @@ namespace Application
 {
     public interface IImageService
     {
-        Task<Result<Image>> CreateImage(IFormFile image, string path);
+        Task<string> SaveImageInPath(IFormFile image, string path);
+        Task<Result<Image>> CreateImage(IFormFile image, string path, bool isNewImage);
         int GetNewId();
+        Task Delete(int id);
     }
 }

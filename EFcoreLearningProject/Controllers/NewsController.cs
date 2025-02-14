@@ -1,4 +1,5 @@
 ﻿using Application;
+using Core.DTO;
 using Core.Exceptions;
 using Core.Models;
 using EFcoreLearningProject.DTO;
@@ -21,26 +22,17 @@ namespace EFcoreLearningProject.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromForm] RequestNews request)
         {
-            Image? image;
-            if (request.Image != null)
+            if (request == null) 
             {
-                var imageRes = await _imageService.CreateImage(request.Image, _picturesPath);
-                if (imageRes.IsFailure)
-                {
-                    return BadRequest(imageRes.Error);
-                }
-                image = imageRes.Value;
+                return BadRequest("request can`t be null");
             }
-            else
+            var image = await _imageService.CreateImage(request.Image!, _picturesPath, true);
+            if (image.IsFailure)
             {
-                var imageRes = Image.Create(_imageService.GetNewId(), "not in path");
-                if (imageRes.IsFailure)
-                {
-                    return BadRequest(imageRes.Error);
-                }
-                image = imageRes.Value;
+                return BadRequest(image.Error);
             }
-            var news = News.Create(_newsService.GetNewId(), request.Title, request.TextData, image, null);
+            
+            var news = News.Create(_newsService.GetNewId(), request.Title, request.TextData, image.Value, null);
 
             if (news.IsFailure)
             {
@@ -52,7 +44,7 @@ namespace EFcoreLearningProject.Controllers
                 Title = news.Value.Title,
                 TextData = news.Value.TextData,
                 Views = news.Value.Views,
-                PathOfTitleImage = image.FileName,
+                PathOfTitleImage = image.Value.FileName,
                 CreatedDate = news.Value.CreatedDate
             };
             return Ok(responseNews);
@@ -102,12 +94,41 @@ namespace EFcoreLearningProject.Controllers
             }
         }
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult> Delete(int id) 
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
                 await _newsService.DeleteNews(id);
                 return Ok();
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Deleting are invalid, `cause {ex.Message}");
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Update(int id,[FromForm] RequestNews requestNews) 
+        {
+            try
+            {
+                var img = await _imageService.CreateImage(requestNews.Image!, _picturesPath, false);
+                if (img.IsFailure)
+                {
+                    return BadRequest(img.Error);
+                }
+                NewsUpdateDTO news = new NewsUpdateDTO() { Id = id, Title = requestNews.Title, TextData = requestNews.TextData, TitleImage = img.Value };
+                await _newsService.UpdateNews(news);
+
+                return Ok();
+            }
+            catch (ImageCreationException imgc)
+            {
+                return BadRequest(imgc.Message);
             }
             catch (EntityNotFoundException ex) 
             {
@@ -115,7 +136,6 @@ namespace EFcoreLearningProject.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Deleting are invalid, `cause {ex.Message}");
                 return BadRequest(ex.Message);
             }
         }

@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.DTO;
+using Core.Models;
 
 namespace Application
 {
@@ -9,5 +10,6 @@ namespace Application
         Task WriteNews(News news);
         Task<List<News>> GetAllNews();
         Task DeleteNews(int id);
+        Task UpdateNews(NewsUpdateDTO news);
     }
 }

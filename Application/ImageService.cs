@@ -8,6 +8,7 @@ using Core.Models;
 using CSharpFunctionalExtensions;
 using DataAccess.Repository;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application
 {
@@ -18,17 +19,33 @@ namespace Application
         {
             _imageRepository = imageRepository;
         }
-        public async Task<Result<Image>> CreateImage(IFormFile image, string path)
+        public async Task<string> SaveImageInPath(IFormFile image, string path) 
         {
             try
             {
-                var fileName = Path.GetFileName(image.FileName);
-                var filePath = Path.Combine(path, fileName);
-                await using (var stream = new FileStream(filePath, FileMode.Create))
+                var fileName = image != null ? Path.GetFileName(image.FileName) : "not in path";
+                var filePath = image != null ? Path.Combine(path, fileName) : fileName;
+                if (image != null)
                 {
-                    await image.CopyToAsync(stream);
+                    await using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(stream);
+                    }
                 }
-                var titleImage = Image.Create(_imageRepository.GetNewId(), filePath);
+                return filePath;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine($"Picture saving is failure: {ex.Message}");
+                throw;
+            }
+        }
+        public async Task<Result<Image>> CreateImage(IFormFile image, string path, bool isNewImage)
+        {
+            try
+            {
+                var filePath = await SaveImageInPath(image, path);
+                var titleImage = isNewImage ? Image.Create(_imageRepository.GetNewId(), filePath) : Image.Create(filePath);
                 return titleImage;
             }
             catch (Exception ex)
@@ -39,6 +56,17 @@ namespace Application
         public int GetNewId()
         {
             return _imageRepository.GetNewId();
+        }
+        public async Task Delete(int id) 
+        {
+            try
+            {
+                await _imageRepository.DeleteImage(id);
+            }
+            catch (Exception ex) 
+            {
+                throw;
+            }
         }
     }
 }

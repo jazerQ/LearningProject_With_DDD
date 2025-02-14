@@ -14,7 +14,11 @@ namespace Core.Models
             this.Id = id;
             this.FileName = fileName;
         }
-        public int Id { get; set; }
+        public Image(string fileName) 
+        {
+            this.FileName = fileName;
+        }
+        public int Id { get; set; } = 0;
         public int NewsId { get; }
         public string FileName { get; set; } = string.Empty;
 
@@ -25,6 +29,15 @@ namespace Core.Models
                 return Result.Failure<Image>("fileName is Empty");
             }
             var image = new Image(id, fileName);
+            return Result.Success<Image>(image);
+        }
+        public static Result<Image> Create(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return Result.Failure<Image>("fileName is Empty");
+            }
+            var image = new Image(fileName);
             return Result.Success<Image>(image);
         }
     }
