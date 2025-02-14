@@ -187,6 +187,29 @@ namespace DataAccess.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("DataAccess.Entities.UserEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("CourseEntityStudentEntity", b =>
                 {
                     b.HasOne("DataAccess.Entities.CourseEntity", null)

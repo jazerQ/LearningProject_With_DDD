@@ -18,6 +18,7 @@ namespace DataAccess
         public DbSet<StudentEntity> Students { get; set; }
         public DbSet<NewsEntity> News { get; set; }
         public DbSet<ImageEntity> Image { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.ApplyConfiguration(new AuthorConfigurations());
@@ -26,6 +27,7 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new StudentConfigurations());
             modelBuilder.ApplyConfiguration(new ImageConfigurations());
             modelBuilder.ApplyConfiguration(new NewsConfigurations());
+            modelBuilder.ApplyConfiguration(new UserConfigurations());
             base.OnModelCreating(modelBuilder);
         }
     }

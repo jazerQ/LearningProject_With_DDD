@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "2xmhHpppkEs=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jazer\\source\\repos\\EFcoreLearningProject\\Infrastructure\\Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jazer\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\jazer\\.nuget\\packages\\csharpfunctionalextensions\\3.4.3\\csharpfunctionalextensions.3.4.3.nupkg.sha512",
+    "C:\\Users\\jazer\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\jazer\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\jazer\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
