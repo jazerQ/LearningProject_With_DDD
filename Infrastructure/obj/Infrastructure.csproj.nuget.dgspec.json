@@ -137,7 +137,7 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.1, )"
             }
           },
           "imports": [

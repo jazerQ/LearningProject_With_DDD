@@ -11,10 +11,11 @@ namespace Infrastructure
 {
     public class JwtProvider
     {
-        public string GenerateToken(User user) 
+        public async Task<string> GenerateToken(User user) 
         {
-            Fi file = new File();
-            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey());
+            using StreamReader stream = new StreamReader("securityKey.txt");
+            string securityKey = await stream.ReadToEndAsync();
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(securityKey));
 
             var token = new JwtSecurityToken()
         }
