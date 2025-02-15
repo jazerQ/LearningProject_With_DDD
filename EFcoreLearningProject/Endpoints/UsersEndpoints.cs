@@ -19,9 +19,10 @@ namespace EFcoreLearningProject.Endpoints
                                  registerUserRequest.Password);
             return Results.Ok();
         }
-        private static async Task<IResult> Login(LoginUserRequest loginUserRequest, UserService userService)  
+        private static async Task<IResult> Login(LoginUserRequest loginUserRequest, UserService userService, HttpContext httpContext)  
         {
             var token = await userService.Login(loginUserRequest.email, loginUserRequest.password);
+            httpContext.Response.Cookies.Append("itsExactlyNotJwt", token);
             return Results.Ok(token);
         }
     }

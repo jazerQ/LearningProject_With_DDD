@@ -2,14 +2,18 @@ using Application;
 using DataAccess;
 using DataAccess.Repository;
 using EFcoreLearningProject.Endpoints;
+using EFcoreLearningProject.Extensions;
 using Infrastructure;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,6 +23,7 @@ builder.Services.AddDbContext<LearningCoursesDbContext>(options =>
 });
 builder.Configuration.AddJsonFile("jwtoptions.json");
 builder.Services.Configure<JwtOptions>(builder.Configuration);
+builder.Services.AddApiAuthentication(builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>());
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
@@ -39,7 +44,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCookiePolicy(new CookiePolicyOptions {
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+    HttpOnly = HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.Always
+});
+
 app.MapUsersEndpoints();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

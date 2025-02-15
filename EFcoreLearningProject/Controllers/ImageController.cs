@@ -1,10 +1,12 @@
 ﻿using Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFcoreLearningProject.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ImageController : ControllerBase
     {
         private readonly IImageService _imageService;
