@@ -144,3 +144,15 @@ C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debu
 C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Application.pdb
 C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Core.pdb
 C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\obj\Debug\net8.0\EFcoreLearningProject.sourcelink.json
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Infrastructure.dll
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\Infrastructure.pdb
+C:\Users\jazer\source\repos\EFcoreLearningProject\EFcoreLearningProject\bin\Debug\net8.0\jwtoptions.json

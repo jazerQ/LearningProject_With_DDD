@@ -1,6 +1,8 @@
 using Application;
 using DataAccess;
 using DataAccess.Repository;
+using EFcoreLearningProject.Endpoints;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,10 +17,17 @@ builder.Services.AddDbContext<LearningCoursesDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("LearningDbContext"));
 });
+builder.Configuration.AddJsonFile("jwtoptions.json");
+builder.Services.Configure<JwtOptions>(builder.Configuration);
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+builder.Services.AddScoped<UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapUsersEndpoints();
 
 app.UseAuthorization();
 

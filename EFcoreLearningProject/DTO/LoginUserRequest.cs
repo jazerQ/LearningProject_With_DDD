@@ -1,6 +1,10 @@
-﻿namespace EFcoreLearningProject.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EFcoreLearningProject.DTO
 {
-    public class LoginUserRequest
-    {
-    }
+    public record LoginUserRequest
+    (
+        [Required] string email,
+        [Required] string password
+    );
 }

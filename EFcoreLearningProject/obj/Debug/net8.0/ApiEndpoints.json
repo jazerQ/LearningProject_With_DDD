@@ -16,6 +16,28 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.UsersEndpoints",
+    "Method": "Login",
+    "RelativePath": "login",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginUserRequest",
+        "Type": "EFcoreLearningProject.DTO.LoginUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EFcoreLearningProject.Controllers.NewsController",
     "Method": "Create",
     "RelativePath": "News",
@@ -113,5 +135,27 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EFcoreLearningProject.Endpoints.UsersEndpoints",
+    "Method": "Register",
+    "RelativePath": "register",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerUserRequest",
+        "Type": "EFcoreLearningProject.DTO.RegisterUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
