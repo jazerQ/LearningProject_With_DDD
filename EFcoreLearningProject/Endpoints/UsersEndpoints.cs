@@ -8,6 +8,7 @@ namespace EFcoreLearningProject.Endpoints
     {
         public static IEndpointRouteBuilder MapUsersEndpoints(this IEndpointRouteBuilder app) 
         {
+            app.MapGroup
             app.MapPost("register", Register);
             app.MapPost("login", Login);
             return app;

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {
-    public class CourseRepository
+    public class CourseRepository : ICourseRepository
     {
         private readonly LearningCoursesDbContext _context;
         public CourseRepository(LearningCoursesDbContext context)
@@ -98,11 +98,11 @@ namespace DataAccess.Repository
                 );
 
         }
-        public async Task DeleteEntity(int id) 
+        public async Task DeleteEntity(int id)
         {
             await _context.Courses.Where(c => c.Id == id).ExecuteDeleteAsync();
         }
     }
 
-    
+
 }
