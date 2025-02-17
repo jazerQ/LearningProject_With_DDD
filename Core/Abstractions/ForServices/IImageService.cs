@@ -2,7 +2,7 @@
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Http;
 
-namespace Application
+namespace Core.Abstractions.ForServices
 {
     public interface IImageService
     {

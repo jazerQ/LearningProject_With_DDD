@@ -1,6 +1,6 @@
 ﻿using Core.Models;
 
-namespace DataAccess.Repository
+namespace Core.Abstractions.ForRepositories
 {
     public interface IUserRepository
     {

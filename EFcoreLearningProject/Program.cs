@@ -1,4 +1,6 @@
 using Application;
+using Core.Abstractions.ForRepositories;
+using Core.Abstractions.ForServices;
 using DataAccess;
 using DataAccess.Repository;
 using EFcoreLearningProject.Endpoints;

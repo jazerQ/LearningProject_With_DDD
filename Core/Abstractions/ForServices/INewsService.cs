@@ -1,7 +1,7 @@
 ﻿using Core.DTO;
 using Core.Models;
 
-namespace Application
+namespace Core.Abstractions.ForServices
 {
     public interface INewsService
     {

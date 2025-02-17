@@ -4,9 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Abstractions.ForRepositories;
+using Core.Abstractions.ForServices;
 using Core.Models;
 using CSharpFunctionalExtensions;
-using DataAccess.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 

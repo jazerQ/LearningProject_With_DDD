@@ -1,4 +1,4 @@
-﻿using Application;
+﻿using Core.Abstractions.ForServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

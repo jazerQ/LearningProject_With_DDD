@@ -1,4 +1,4 @@
-﻿using Application;
+﻿using Core.Abstractions.ForServices;
 using Core.DTO;
 using Core.Exceptions;
 using Core.Models;

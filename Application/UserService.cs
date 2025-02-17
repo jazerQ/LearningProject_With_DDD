@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Abstractions.ForRepositories;
 using Core.Models;
-using DataAccess.Repository;
 using Infrastructure;
 
 namespace Application

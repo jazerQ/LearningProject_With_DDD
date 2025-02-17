@@ -1,7 +1,8 @@
-﻿using Core.DTO;
+﻿using Core.Abstractions.ForRepositories;
+using Core.Abstractions.ForServices;
+using Core.DTO;
 using Core.Exceptions;
 using Core.Models;
-using DataAccess.Repository;
 
 namespace Application
 {

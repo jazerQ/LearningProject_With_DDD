@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application;
+using Core.Abstractions.ForRepositories;
 using Core.DTO;
 using Core.Exceptions;
 using Core.Models;

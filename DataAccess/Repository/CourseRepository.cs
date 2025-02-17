@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Models.EducationPlatform;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace DataAccess.Repository
 
         public async Task<List<CourseEntity>> Get()
         {
+
             return await _context.Courses
                 .AsNoTracking()// чтобы не отслеживалось, оптимизирует запрос в бд
                 .OrderBy(c => c.Price)   // т.о происходит сортировка по цене
