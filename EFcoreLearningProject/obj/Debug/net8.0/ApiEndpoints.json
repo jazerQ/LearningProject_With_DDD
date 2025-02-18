@@ -1,5 +1,59 @@
 [
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.CoursesEndpoints",
+    "Method": "Write",
+    "RelativePath": "Courses/minimal/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestCourse",
+        "Type": "EFcoreLearningProject.ContractsForEducationPlatform.RequestCourse",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EFcoreLearningProject.Endpoints.CoursesEndpoints",
+    "Method": "Get",
+    "RelativePath": "Courses/minimal/",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_1",
+    "RelativePath": "get",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EFcoreLearningProject.Controllers.ImageController",
     "Method": "Delete",
     "RelativePath": "Image/{id}",

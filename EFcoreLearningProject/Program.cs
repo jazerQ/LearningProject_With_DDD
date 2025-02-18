@@ -3,6 +3,7 @@ using Core.Abstractions.ForRepositories;
 using Core.Abstractions.ForServices;
 using DataAccess;
 using DataAccess.Repository;
+using EFcoreLearningProject;
 using EFcoreLearningProject.Endpoints;
 using EFcoreLearningProject.Extensions;
 using Infrastructure;
@@ -25,16 +26,20 @@ builder.Services.AddDbContext<LearningCoursesDbContext>(options =>
 });
 builder.Configuration.AddJsonFile("jwtoptions.json");
 builder.Services.Configure<JwtOptions>(builder.Configuration);
+builder.Services.Configure<AuthorizationOptions>(builder.Configuration.GetSection("AuthorizationOptions"));
 builder.Services.AddApiAuthentication(builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>());
-builder.Services.AddScoped<IImageService, ImageService>();
-builder.Services.AddScoped<INewsService, NewsService>();
-builder.Services.AddScoped<INewsRepository, NewsRepository>();
-builder.Services.AddScoped<IImageRepository, ImageRepository>();
+//builder.Services.AddScoped<IImageService, ImageService>();
+//builder.Services.AddScoped<INewsService, NewsService>();
+//builder.Services.AddScoped<INewsRepository, NewsRepository>();
+//builder.Services.AddScoped<IImageRepository, ImageRepository>();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IJwtProvider, JwtProvider>();
-builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
-builder.Services.AddScoped<UserService>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+//builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+//builder.Services.AddScoped<UserService>();
+//builder.Services.AddScoped<ICourseService, CourseService>();
+//builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddAllDependency();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,5 +64,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapCoursesEndpoint();
+app.MapGet("get", () => {
+    return Results.Ok("Hellp World");
+}).RequireAuthorization("AdminPolicy");
 app.Run();

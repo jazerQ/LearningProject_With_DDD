@@ -66,6 +66,12 @@ namespace DataAccess.Repository
 
         public async Task WriteValue(int id, int authorId, string title, string description, decimal price)
         {
+            AuthorEntity authorEntity = new AuthorEntity()
+            {
+                Id = authorId,
+                Username = "kostil",
+                CourseId = id
+            };
             CourseEntity course = new CourseEntity()
             {
                 Id = id,
@@ -74,26 +80,25 @@ namespace DataAccess.Repository
                 Description = description,
                 Price = price
             };
+            await _context.Authors.AddAsync(authorEntity);
             await _context.Courses.AddAsync(course);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateValue(int id, int authorId, string title, string description, decimal price)
+        public async Task UpdateValue(int id, string title, string description, decimal price)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id) ?? throw new Exception("Error! application cant find this entity");
-            course.AuthorId = authorId;
             course.Title = title;
             course.Description = description;
             course.Price = price;
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateValueSecondMethod(int id, int authorId, string title, string description, decimal price)
+        public async Task UpdateValueSecondMethod(int id, string title, string description, decimal price)
         {
             await _context.Courses
                 .Where(c => c.Id == id)
-                .ExecuteUpdateAsync(s =>
-                        s.SetProperty(c => c.AuthorId, authorId)
+                .ExecuteUpdateAsync(s => s
                          .SetProperty(c => c.Title, title)
                          .SetProperty(c => c.Description, description)
                          .SetProperty(c => c.Price, price)

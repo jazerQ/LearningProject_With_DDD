@@ -1,0 +1,15 @@
+C:\app\publish\Infrastructure.dll
+C:\app\publish\Infrastructure.deps.json
+C:\app\publish\Infrastructure.pdb
+C:\app\publish\BCrypt.Net-Next.dll
+C:\app\publish\CSharpFunctionalExtensions.dll
+C:\app\publish\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\app\publish\Microsoft.IdentityModel.Abstractions.dll
+C:\app\publish\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\app\publish\Microsoft.IdentityModel.Logging.dll
+C:\app\publish\Microsoft.IdentityModel.Protocols.dll
+C:\app\publish\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\app\publish\Microsoft.IdentityModel.Tokens.dll
+C:\app\publish\System.IdentityModel.Tokens.Jwt.dll
+C:\app\publish\Core.dll
+C:\app\publish\Core.pdb

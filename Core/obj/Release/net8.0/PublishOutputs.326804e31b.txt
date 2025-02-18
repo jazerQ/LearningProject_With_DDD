@@ -1,0 +1,7 @@
+C:\app\publish\Core.dll
+C:\app\publish\Core.deps.json
+C:\app\publish\Core.pdb
+C:\app\publish\CSharpFunctionalExtensions.dll
+C:\app\publish\Microsoft.AspNetCore.Http.Features.dll
+C:\app\publish\Microsoft.Extensions.Primitives.dll
+C:\app\publish\System.IO.Pipelines.dll

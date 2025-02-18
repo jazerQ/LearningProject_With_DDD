@@ -10,8 +10,8 @@ namespace DataAccess.Repository
         Task<CourseEntity?> GetWithId(int id);
         Task<List<CourseEntity>> GetWithLessons();
         Task<List<CourseEntity>> GetWithPagination(int page, int pageSize);
-        Task UpdateValue(int id, int authorId, string title, string description, decimal price);
-        Task UpdateValueSecondMethod(int id, int authorId, string title, string description, decimal price);
-        Task WriteValue(int id, int authorId, string title, string description, decimal price);
+        Task UpdateValue(int id, string title, string description, decimal price);
+        Task UpdateValueSecondMethod(int id, string title, string description, decimal price);
+        Task WriteValue(int id,int authorId, string title, string description, decimal price);
     }
 }

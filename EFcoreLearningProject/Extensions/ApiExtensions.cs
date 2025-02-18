@@ -11,7 +11,13 @@ namespace EFcoreLearningProject.Extensions
 
         public static void AddApiAuthentication(this IServiceCollection services, IOptions<JwtOptions> jwtOptions)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => {
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => {
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuer = false,
@@ -31,7 +37,18 @@ namespace EFcoreLearningProject.Extensions
                     }
                 };
             });
-            services.AddAuthorization();
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("AdminPolicy", policy => 
+                {
+                    //policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireClaim("Admin", "true");
+                });
+                options.AddPolicy("AuthorPolicy", policy => 
+                {
+                    policy.RequireClaim("Author", "true");
+                });
+            });
         }
     }
 }
