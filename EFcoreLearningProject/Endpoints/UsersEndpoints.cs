@@ -1,4 +1,6 @@
-﻿using Application;
+﻿using System.Runtime.CompilerServices;
+using Application;
+using Core.Enums;
 using EFcoreLearningProject.DTO;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -10,6 +12,7 @@ namespace EFcoreLearningProject.Endpoints
         {
             
             app.MapPost("register", Register);
+            app.MapPost("register-admin", RegisterAdmin);
             app.MapPost("login", Login);
             return app;
         }
@@ -17,8 +20,24 @@ namespace EFcoreLearningProject.Endpoints
         {
             await userService.Register(registerUserRequest.UserName,
                                  registerUserRequest.Email,
-                                 registerUserRequest.Password);
+                                 registerUserRequest.Password,
+                                 Role.User);
             return Results.Ok();
+        }
+        private static async Task<IResult> RegisterAdmin(RegisterUserRequest registerUserRequest, UserService userService) 
+        {
+            try
+            {
+                await userService.Register(registerUserRequest.UserName,
+                                            registerUserRequest.Email,
+                                            registerUserRequest.Password,
+                                            Role.Admin);
+                return Results.Ok();
+            }
+            catch (Exception ex) 
+            {
+                return Results.BadRequest(ex.Message);
+            }
         }
         private static async Task<IResult> Login(LoginUserRequest loginUserRequest, UserService userService, HttpContext httpContext)  
         {

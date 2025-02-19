@@ -20,7 +20,10 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.OperationFilter<SwaggerFileOperationFilter>();
+}); ;
 builder.Services.AddDbContext<LearningCoursesDbContext>(options => 
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("LearningDbContext"));
@@ -66,7 +69,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapCoursesEndpoint();
+
 app.MapGet("get", () => {
     return Results.Ok("Hellp World");
-}).RequireAuthorization(policy => policy.AddRequirements(new PermissionRequirement(Permission.Read, Permission.Create)));
+}).RequirePermissions(Permission.Read);
+app.MapPost("post", () => 
+{
+    return Results.Ok("Ты создал что-то");
+}).RequirePermissions(Permission.Create);
+app.MapPut("put", () =>
+  {
+      return Results.Ok("Ты обновил что-то");
+  }).RequirePermissions(Permission.Update);
+app.MapDelete("delete", () =>
+{
+    return Results.Ok("ты обновил что-то");
+});
 app.Run();

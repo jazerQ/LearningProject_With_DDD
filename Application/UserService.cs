@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Abstractions.ForRepositories;
+using Core.Enums;
 using Core.Models;
 using Infrastructure;
 
@@ -20,9 +21,9 @@ namespace Application
             _passwordHasherService = passwordHasherService;
             _jwtProvider = jwtProvider;
         }
-        public async Task Register(string username, string email, string password) 
+        public async Task Register(string username, string email, string password,params Role[] role) 
         {
-            var user = User.Create(Guid.NewGuid(), username, _passwordHasherService.Generate(password), email);
+            var user = User.Create(Guid.NewGuid(), username, _passwordHasherService.Generate(password), email, role);
             if (user.IsFailure) 
             {
                 throw new Exception(user.Error);

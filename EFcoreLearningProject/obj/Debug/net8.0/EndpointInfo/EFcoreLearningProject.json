@@ -49,6 +49,42 @@
         }
       }
     },
+    "/post": {
+      "post": {
+        "tags": [
+          "EFcoreLearningProject"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/put": {
+      "put": {
+        "tags": [
+          "EFcoreLearningProject"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/delete": {
+      "delete": {
+        "tags": [
+          "EFcoreLearningProject"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Image/{id}": {
       "delete": {
         "tags": [
@@ -224,6 +260,28 @@
       }
     },
     "/register": {
+      "post": {
+        "tags": [
+          "UsersEndpoints"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/register-admin": {
       "post": {
         "tags": [
           "UsersEndpoints"

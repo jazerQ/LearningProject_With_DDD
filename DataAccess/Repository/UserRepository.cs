@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Abstractions.ForRepositories;
+using Core.Entities;
 using Core.Enums;
 using Core.Models;
 using DataAccess.Entities;
@@ -20,7 +21,18 @@ namespace DataAccess.Repository
         }
         public async Task Add(User user)
         {
-            var userEntity = new UserEntity() { Id = user.Id, Username = user.Username, PasswordHash = user.PasswordHash, Email = user.Email };
+            RoleEntity[] roleEntities = new RoleEntity[user.Roles.Length];
+            for (int i = 0; i < user.Roles.Length; i++) {
+                roleEntities[i] = await _context.Roles.SingleOrDefaultAsync(r => r.Id == (int)user.Roles[i]) ?? throw new InvalidOperationException();
+            }
+            var userEntity = new UserEntity()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                PasswordHash = user.PasswordHash,
+                Email = user.Email,
+                Roles = roleEntities
+            };
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();
         }
@@ -41,6 +53,7 @@ namespace DataAccess.Repository
             var roles = await _context.Users
                             .AsNoTracking()
                             .Include(u => u.Roles)
+                            .ThenInclude(u => u.Permissions)
                             .Where(u => u.Id == id)
                             .Select(u => u.Roles)
                             .ToArrayAsync();

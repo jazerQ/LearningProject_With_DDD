@@ -4,6 +4,7 @@ using Core.Abstractions.ForRepositories;
 using Core.Abstractions.ForServices;
 using DataAccess.Repository;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EFcoreLearningProject
 {
@@ -24,6 +25,8 @@ namespace EFcoreLearningProject
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
             return services;
         }
     }

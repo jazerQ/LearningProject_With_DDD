@@ -9,14 +9,14 @@ using DataAccess.Repository;
 
 namespace Application
 {
-    public class PermissionService
+    public class PermissionService : IPermissionService
     {
         private readonly IUserRepository _userRepository;
-        public PermissionService(IUserRepository userRepository) 
+        public PermissionService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
-        public async Task<HashSet<Permission>> GetPermissionsAsync(Guid id) 
+        public async Task<HashSet<Permission>> GetPermissionsAsync(Guid id)
         {
             return await _userRepository.GetUserPermissions(id);
         }

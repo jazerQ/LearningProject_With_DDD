@@ -1,8 +1,10 @@
 ﻿using Core.Abstractions.ForServices;
 using Core.DTO;
+using Core.Enums;
 using Core.Exceptions;
 using Core.Models;
 using EFcoreLearningProject.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFcoreLearningProject.Controllers
@@ -20,9 +22,10 @@ namespace EFcoreLearningProject.Controllers
             _imageService = imageService;
         }
         [HttpPost]
+        [Authorize(Policy = "Create")]
         public async Task<ActionResult> Create([FromForm] RequestNews request)
         {
-            if (request == null) 
+            if (request == null)
             {
                 return BadRequest("request can`t be null");
             }
@@ -31,7 +34,7 @@ namespace EFcoreLearningProject.Controllers
             {
                 return BadRequest(image.Error);
             }
-            
+
             var news = News.Create(_newsService.GetNewId(), request.Title, request.TextData, image.Value, null);
 
             if (news.IsFailure)
@@ -49,7 +52,9 @@ namespace EFcoreLearningProject.Controllers
             };
             return Ok(responseNews);
         }
+
         [HttpGet("{id:int}")]
+        [Authorize(Policy = "Read")]
         public async Task<ActionResult> GetById(int id)
         {
             try
@@ -57,7 +62,8 @@ namespace EFcoreLearningProject.Controllers
                 var news = await _newsService.GetNews(id);
                 var fileName = news.TitleImage == null ? "" : news.TitleImage.FileName;
 
-                var responseNews = new ResponseNews {
+                var responseNews = new ResponseNews
+                {
                     Title = news.Title,
                     TextData = news.TextData,
                     Views = news.Views,
@@ -72,6 +78,7 @@ namespace EFcoreLearningProject.Controllers
             }
         }
         [HttpGet]
+        [Authorize(Policy = "Read")]
         public async Task<ActionResult> GetAll()
         {
             try
@@ -94,6 +101,7 @@ namespace EFcoreLearningProject.Controllers
             }
         }
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "Delete")]
         public async Task<ActionResult> Delete(int id)
         {
             try
@@ -112,7 +120,8 @@ namespace EFcoreLearningProject.Controllers
             }
         }
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Update(int id,[FromForm] RequestNews requestNews) 
+        [Authorize(Policy = "Update")]
+        public async Task<ActionResult> Update(int id, [FromForm] RequestNews requestNews)
         {
             try
             {
@@ -130,7 +139,7 @@ namespace EFcoreLearningProject.Controllers
             {
                 return BadRequest(imgc.Message);
             }
-            catch (EntityNotFoundException ex) 
+            catch (EntityNotFoundException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -140,4 +149,6 @@ namespace EFcoreLearningProject.Controllers
             }
         }
     }
+
 }
+
