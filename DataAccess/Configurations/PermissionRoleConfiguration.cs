@@ -19,12 +19,12 @@ namespace DataAccess.Configurations
         }
         public void Configure(EntityTypeBuilder<PermissionRoleEntity> builder)
         {
-            builder.HasKey(c => new { c.PermissionId, c.RoleId });
+            builder.HasKey(c => new { c.RoleId, c.PermissionId });
             builder.HasData(ParsePermissionRoles());
         }
         private List<PermissionRoleEntity> ParsePermissionRoles() 
         {
-            return _authorization.PermissionsRoles.SelectMany(rp => rp.Permission
+            return _authorization.PermissionRole.SelectMany(rp => rp.Permissions
                                                             .Select(r => new PermissionRoleEntity
                                                             {
                                                                 RoleId = (int)Enum.Parse<Role>(rp.Role),

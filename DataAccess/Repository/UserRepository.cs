@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Abstractions.ForRepositories;
+using Core.Enums;
 using Core.Models;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,21 @@ namespace DataAccess.Repository
                 throw new Exception(user.Error);
             }
             return user.Value;
+
+        }
+        public async Task<HashSet<Permission>> GetUserPermissions(Guid id) 
+        {
+            var roles = await _context.Users
+                            .AsNoTracking()
+                            .Include(u => u.Roles)
+                            .Where(u => u.Id == id)
+                            .Select(u => u.Roles)
+                            .ToArrayAsync();
+            return roles.SelectMany(r => r)
+                        .SelectMany(r => r.Permissions)
+                        .Select(r => (Permission)r.Id)
+                        .ToHashSet();
+           
 
         }
     }

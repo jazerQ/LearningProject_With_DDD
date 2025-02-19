@@ -37,18 +37,7 @@ namespace EFcoreLearningProject.Extensions
                     }
                 };
             });
-            services.AddAuthorization(options => 
-            {
-                options.AddPolicy("AdminPolicy", policy => 
-                {
-                    //policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                    policy.RequireClaim("Admin", "true");
-                });
-                options.AddPolicy("AuthorPolicy", policy => 
-                {
-                    policy.RequireClaim("Author", "true");
-                });
-            });
+            services.AddAuthorization();
         }
     }
 }

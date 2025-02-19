@@ -9,11 +9,11 @@ namespace DataAccess
 {
     public class AuthorizationOptions
     {
-        public PermissionRole[] PermissionsRoles { get; set; } = []; 
+        public PermissionRole[] PermissionRole { get; set; } = []; 
     }
     public class PermissionRole 
     {
         public string Role { get; set; } = string.Empty;
-        public string[] Permission { get; set; } = [];
+        public string[] Permissions { get; set; } = [];
     }
 }

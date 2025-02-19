@@ -1,6 +1,7 @@
 using Application;
 using Core.Abstractions.ForRepositories;
 using Core.Abstractions.ForServices;
+using Core.Enums;
 using DataAccess;
 using DataAccess.Repository;
 using EFcoreLearningProject;
@@ -67,5 +68,5 @@ app.MapControllers();
 app.MapCoursesEndpoint();
 app.MapGet("get", () => {
     return Results.Ok("Hellp World");
-}).RequireAuthorization("AdminPolicy");
+}).RequireAuthorization(policy => policy.AddRequirements(new PermissionRequirement(Permission.Read, Permission.Create)));
 app.Run();

@@ -22,8 +22,7 @@ namespace Infrastructure
         public async Task<string> GenerateToken(User user)
         {
             Claim[] claims = [
-                new("userId", user.Id.ToString()),
-                new("Admin", "true")
+                new("userId", user.Id.ToString())
             ];
             //using StreamReader stream = new StreamReader("securityKey.txt");
             //string securityKey = await stream.ReadToEndAsync();

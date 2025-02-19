@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.Enums;
+using Core.Models;
 
 namespace Core.Abstractions.ForRepositories
 {
@@ -6,5 +7,6 @@ namespace Core.Abstractions.ForRepositories
     {
         Task Add(User user);
         Task<User> GetByEmail(string email);
+        Task<HashSet<Permission>> GetUserPermissions(Guid id);
     }
 }
