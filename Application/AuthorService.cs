@@ -14,9 +14,6 @@ namespace Application
         {
             _authorRepository = authorRepository;
         }
-        public int GetNewValueOfAuthorId()
-        {
-            return _authorRepository.GetLastValueOfAuthorId();
-        }
+        
     }
 }

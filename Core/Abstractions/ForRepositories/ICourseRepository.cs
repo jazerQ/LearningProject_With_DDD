@@ -4,14 +4,14 @@ namespace DataAccess.Repository
 {
     public interface ICourseRepository
     {
-        Task DeleteEntity(int id);
+        Task DeleteEntity(Guid id, Guid authorId);
         Task<List<CourseEntity>> Get();
         Task<List<CourseEntity>> GetWithFilter(string title, decimal price = -1);
-        Task<CourseEntity?> GetWithId(int id);
         Task<List<CourseEntity>> GetWithLessons();
         Task<List<CourseEntity>> GetWithPagination(int page, int pageSize);
-        Task UpdateValue(int id, string title, string description, decimal price);
-        Task UpdateValueSecondMethod(int id, string title, string description, decimal price);
-        Task WriteValue(int id,int authorId, string title, string description, decimal price);
+        Task<List<CourseEntity>> GetWithTitle(string title);
+        Task UpdateValue(Guid id, Guid authorId, string title, string description, decimal price);
+        Task UpdateValueSecondMethod(Guid id, Guid authorId, string title, string description, decimal price);
+        Task WriteValue(Guid id, Guid authorId, string title, string description, decimal price);
     }
 }

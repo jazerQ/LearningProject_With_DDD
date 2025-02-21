@@ -15,13 +15,13 @@ namespace DataAccess.Repository
         {
             _context = context;
         }
-        public async Task WriteLesson(int courseId, LessonEntity lesson) 
+        public async Task WriteLesson(Guid courseId, LessonEntity lesson) 
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId) ?? throw new Exception("Error! Not Found your essential course");
             course.Lessons.Add(lesson);
             await _context.SaveChangesAsync();
         }
-        public async Task WriteLesson2(int courseId, string title, string description, string lessonText) 
+        public async Task WriteLesson2(Guid courseId, string title, string description, string lessonText) 
         {
             var lesson = new LessonEntity()
             {

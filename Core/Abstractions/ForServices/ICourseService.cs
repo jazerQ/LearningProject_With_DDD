@@ -4,10 +4,10 @@ namespace Application
 {
     public interface ICourseService
     {
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Guid id, Guid authorId);
         Task<List<CourseEntity>> Get();
         Task<List<CourseEntity>> GetWithLessons();
-        Task UpdateAsync(int id, string title, string description, decimal price);
-        Task WriteAsync(int id, int authorId, string title, string description, decimal price);
+        Task UpdateAsync(Guid id, Guid authorId, string title, string description, decimal price);
+        Task WriteAsync(Guid id, Guid authorId, string title, string description, decimal price);
     }
 }

@@ -4,8 +4,7 @@ namespace EFcoreLearningProject.ContractsForEducationPlatform
 {
     public record RequestCourse
     (
-        [Required]int id,
-        int authorId,
+        [Required]Guid id,
         [Required]string title,
         [Required]string description,
         decimal price

@@ -21,8 +21,7 @@ namespace DataAccess.Repository
         {
 
             return await _context.Courses
-                .AsNoTracking()// чтобы не отслеживалось, оптимизирует запрос в бд
-                .OrderBy(c => c.Price)   // т.о происходит сортировка по цене
+                .AsNoTracking()// чтобы не отслеживалось, оптимизирует запрос в б 
                 .ToListAsync();
         }
 
@@ -34,11 +33,12 @@ namespace DataAccess.Repository
                 .ToListAsync();
         }
 
-        public async Task<CourseEntity?> GetWithId(int id)
+        public async Task<List<CourseEntity>> GetWithTitle(string title)
         {
             return await _context.Courses
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .Where(c => c.Title.Contains(title))
+                .ToListAsync();
         }
         public async Task<List<CourseEntity>> GetWithFilter(string title, decimal price = -1)
         {
@@ -64,12 +64,13 @@ namespace DataAccess.Repository
                                 .ToListAsync();
         }
 
-        public async Task WriteValue(int id, int authorId, string title, string description, decimal price)
+        public async Task WriteValue(Guid id, Guid authorId, string title, string description, decimal price)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == authorId) ?? throw new InvalidOperationException("User Not Found");
             AuthorEntity authorEntity = new AuthorEntity()
             {
                 Id = authorId,
-                Username = "kostil",
+                Username = user.Username, // ТУТ КОСТЫЛЬ!
                 CourseId = id
             };
             CourseEntity course = new CourseEntity()
@@ -85,19 +86,19 @@ namespace DataAccess.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateValue(int id, string title, string description, decimal price)
+        public async Task UpdateValue(Guid id, Guid authorId, string title, string description, decimal price)
         {
-            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id) ?? throw new Exception("Error! application cant find this entity");
+            var course = await _context.Courses.FirstOrDefaultAsync(c => (c.Id == id && c.AuthorId == authorId)) ?? throw new Exception("Error! application cant find this entity");
             course.Title = title;
             course.Description = description;
             course.Price = price;
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateValueSecondMethod(int id, string title, string description, decimal price)
+        public async Task UpdateValueSecondMethod(Guid id, Guid authorId, string title, string description, decimal price)
         {
             await _context.Courses
-                .Where(c => c.Id == id)
+                .Where(c => (c.Id == id && c.AuthorId == authorId))
                 .ExecuteUpdateAsync(s => s
                          .SetProperty(c => c.Title, title)
                          .SetProperty(c => c.Description, description)
@@ -105,9 +106,9 @@ namespace DataAccess.Repository
                 );
 
         }
-        public async Task DeleteEntity(int id)
+        public async Task DeleteEntity(Guid id, Guid authorId)
         {
-            await _context.Courses.Where(c => c.Id == id).ExecuteDeleteAsync();
+            await _context.Courses.Where(c => (c.Id == id && c.AuthorId == authorId)).ExecuteDeleteAsync();
         }
     }
 

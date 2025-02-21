@@ -1,7 +1,9 @@
-﻿namespace DataAccess.Repository
+﻿using DataAccess.Entities;
+
+namespace DataAccess.Repository
 {
     public interface IAuthorRepository
     {
-        int GetLastValueOfAuthorId();
+        Task<AuthorEntity> GetWithId(Guid id);
     }
 }

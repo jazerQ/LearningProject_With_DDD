@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {
@@ -13,9 +15,9 @@ namespace DataAccess.Repository
         {
             _context = context;
         }
-        public int GetLastValueOfAuthorId()
+        public async Task<AuthorEntity> GetWithId(Guid id) 
         {
-            return _context.Authors.Max(a => a.Id) + 1;
+            return await _context.Authors.FirstOrDefaultAsync(a => a.Id == id) ?? throw new InvalidOperationException($"Not found Entity with Id {id}");
         }
     }
 }

@@ -8,10 +8,10 @@ namespace DataAccess.Entities
 {
     public class AuthorEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Username { get; set; } = string.Empty;
 
-        public int CourseId { get; set; }
+        public Guid CourseId { get; set; }
         public CourseEntity? Course { get; set; }
     }
 }

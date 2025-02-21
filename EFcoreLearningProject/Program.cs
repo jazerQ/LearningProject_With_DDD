@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen(c =>
 }); ;
 builder.Services.AddDbContext<LearningCoursesDbContext>(options => 
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("LearningDbContext"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("LearningDbContext"));
 });
 builder.Configuration.AddJsonFile("jwtoptions.json");
 builder.Services.Configure<JwtOptions>(builder.Configuration);
