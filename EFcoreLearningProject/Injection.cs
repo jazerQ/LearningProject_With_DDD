@@ -26,6 +26,8 @@ namespace EFcoreLearningProject
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IPermissionService, PermissionService>();
+            services.AddScoped<ILessonRepository, LessonRepository>();
+            services.AddScoped<ILessonService, LessonService>();
             services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
             return services;
         }

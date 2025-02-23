@@ -63,12 +63,16 @@ app.UseCookiePolicy(new CookiePolicyOptions {
 
 app.MapUsersEndpoints();
 
+app.MapCoursesEndpoint();
+
+app.MapLessonEndpoints();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapCoursesEndpoint();
+
 
 app.MapGet("get", () => {
     return Results.Ok("Hellp World");

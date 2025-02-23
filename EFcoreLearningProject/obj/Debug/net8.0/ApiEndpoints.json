@@ -86,6 +86,28 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.LessonEndpoints",
+    "Method": "Get",
+    "RelativePath": "Lessons/minimal/",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EFcoreLearningProject.Endpoints.UsersEndpoints",
     "Method": "Login",
     "RelativePath": "login",
