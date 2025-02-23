@@ -14,6 +14,7 @@ namespace EFcoreLearningProject.Endpoints
             app.MapPost("register", Register);
             app.MapPost("register-admin", RegisterAdmin);
             app.MapPost("login", Login);
+            app.MapDelete("logout", Logout);
             return app;
         }
         private static async Task<IResult> Register(RegisterUserRequest registerUserRequest, UserService userService) 
@@ -44,6 +45,11 @@ namespace EFcoreLearningProject.Endpoints
             var token = await userService.Login(loginUserRequest.email, loginUserRequest.password);
             httpContext.Response.Cookies.Append("itsExactlyNotJwt", token);
             return Results.Ok(token);
+        }
+        private static IResult Logout(HttpContext httpContext) 
+        {
+            httpContext.Response.Cookies.Delete("itsExactlyNotJwt");
+            return Results.NoContent();
         }
     }
 }

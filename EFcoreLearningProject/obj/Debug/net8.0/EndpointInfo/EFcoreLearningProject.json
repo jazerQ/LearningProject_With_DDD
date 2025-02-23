@@ -383,6 +383,18 @@
           }
         }
       }
+    },
+    "/logout": {
+      "delete": {
+        "tags": [
+          "UsersEndpoints"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

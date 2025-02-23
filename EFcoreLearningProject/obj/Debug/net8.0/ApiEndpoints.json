@@ -162,6 +162,22 @@
     ]
   },
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.UsersEndpoints",
+    "Method": "Logout",
+    "RelativePath": "logout",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EFcoreLearningProject.Controllers.NewsController",
     "Method": "Create",
     "RelativePath": "News",
