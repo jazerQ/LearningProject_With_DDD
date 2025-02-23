@@ -20,6 +20,7 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Telegram.bot" Version="22.4.3" />
   </ItemGroup>
 
   <ItemGroup>
