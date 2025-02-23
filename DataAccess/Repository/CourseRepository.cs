@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.DTO;
+using Core.Exceptions;
 using Core.Models.EducationPlatform;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +19,45 @@ namespace DataAccess.Repository
             _context = context;
         }
 
-        public async Task<List<CourseEntity>> Get()
+        public async Task<List<CourseDTO>> Get()
         {
 
-            return await _context.Courses
+            var courses  = await _context.Courses
                 .AsNoTracking()// чтобы не отслеживалось, оптимизирует запрос в б 
+                .Include(c => c.Lessons)
+                .Include(c => c.Students)
+                .Include(c => c.Author)
+                .Select(c => c)
                 .ToListAsync();
+            List<CourseDTO> coursesDTO = courses.Select(c => new CourseDTO { 
+                Id = c.Id,
+                Title = c.Title,
+                Description = c.Description,
+                Price = c.Price,
+                Author = c.Author != null ? new AuthorDTO { Id = c.AuthorId, Username = c.Author.Username } : null,
+                Lessons = c.Lessons.Select(l => new LessonDTO { Id = l.Id, Description = l.Description, LessonText = l.LessonText, Title = l.Title }).ToList(),
+                Students = c.Students.Select(s => new StudentsDTO { Id = s.Id, Username = s.Username}).ToList()
+                })
+                .ToList();
+            return coursesDTO;
+
+        }
+        public async Task<Guid> GetCourseIdByUserId(Guid userId) 
+        {
+            try
+            {
+                var courseId = await _context.Courses.FirstOrDefaultAsync(c => c.AuthorId == userId) ?? throw new EntityNotFoundException("I not found your courses");
+                return courseId.Id;
+            }
+            catch (EntityNotFoundException ex)
+            {
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         public async Task<List<CourseEntity>> GetWithLessons()

@@ -36,7 +36,8 @@ namespace EFcoreLearningProject.Endpoints
                 {
                     return Results.BadRequest("you not admin!");
                 }
-                await courseService.WriteAsync(requestCourse.id, authorId, requestCourse.title, requestCourse.description, requestCourse.price);
+                
+                await courseService.WriteAsync(Guid.NewGuid(), authorId, requestCourse.title, requestCourse.description, requestCourse.price);
                 return Results.NoContent();
             }
             catch (Exception ex) 

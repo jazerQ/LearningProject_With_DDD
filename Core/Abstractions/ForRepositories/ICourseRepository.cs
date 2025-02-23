@@ -1,11 +1,13 @@
-﻿using DataAccess.Entities;
+﻿using Core.DTO;
+using DataAccess.Entities;
 
 namespace DataAccess.Repository
 {
     public interface ICourseRepository
     {
         Task DeleteEntity(Guid id, Guid authorId);
-        Task<List<CourseEntity>> Get();
+        Task<List<CourseDTO>> Get();
+        Task<Guid> GetCourseIdByUserId(Guid userId);
         Task<List<CourseEntity>> GetWithFilter(string title, decimal price = -1);
         Task<List<CourseEntity>> GetWithLessons();
         Task<List<CourseEntity>> GetWithPagination(int page, int pageSize);

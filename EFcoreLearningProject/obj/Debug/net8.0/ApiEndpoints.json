@@ -108,6 +108,38 @@
     ]
   },
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.LessonEndpoints",
+    "Method": "Write",
+    "RelativePath": "Lessons/minimal/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "description",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "lessonText",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EFcoreLearningProject.Endpoints.UsersEndpoints",
     "Method": "Login",
     "RelativePath": "login",
