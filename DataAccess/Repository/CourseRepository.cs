@@ -180,6 +180,37 @@ namespace DataAccess.Repository
                 Console.WriteLine(ex.Message);
             }
         }
+        public async Task<CourseDTO> GetMyManagedCourse(Guid userId) 
+        {
+            Guid courseId = await GetCourseIdByUserId(userId);
+            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId) ?? throw new EntityNotFoundException("у вас нет на данный момент курсов");
+            var courseDto = new CourseDTO
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                Price = course.Price,
+                Author = new AuthorDTO
+                {
+                    Id = userId,
+                    Username = await _context.Users.Where(u => u.Id == userId).Select(u => u.Username).SingleOrDefaultAsync() ?? throw new EntityNotFoundException("пользователь не найден")
+                },
+                Lessons = await _context.Lessons.Where(l => l.CourseId == courseId).Select(l => new LessonDTO
+                {
+                    Id = l.Id,
+                    Title = l.Title,
+                    Description = l.Description,
+                    LessonText = l.LessonText
+
+                }).ToListAsync(),
+                Students = await _context.Students.Include(s => s.Courses).Where(s => s.Courses.Any(c => c.Id == courseId)).Select(s => new StudentsDTO
+                {
+                    Id = s.Id,
+                    Username = s.Username
+                }).ToListAsync()
+            };
+            return courseDto;
+        }
     }
 
 
