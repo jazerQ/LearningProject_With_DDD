@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Application;
 using Core.Enums;
+using Core.Exceptions;
 using EFcoreLearningProject.DTO;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -19,11 +20,22 @@ namespace EFcoreLearningProject.Endpoints
         }
         private static async Task<IResult> Register(RegisterUserRequest registerUserRequest, UserService userService) 
         {
-            await userService.Register(registerUserRequest.UserName,
-                                 registerUserRequest.Email,
-                                 registerUserRequest.Password,
-                                 Role.User);
-            return Results.Ok();
+            try
+            {
+                await userService.Register(registerUserRequest.UserName,
+                                     registerUserRequest.Email,
+                                     registerUserRequest.Password,
+                                     Role.User);
+                return Results.Ok();
+            }
+            catch (NotValidEmailException ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+            catch (Exception ex) 
+            {
+                return Results.BadRequest(ex.Message);
+            }
         }
         private static async Task<IResult> RegisterAdmin(RegisterUserRequest registerUserRequest, UserService userService) 
         {

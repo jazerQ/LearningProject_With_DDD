@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Core.Abstractions.ForRepositories;
 using Core.Entities;
 using Core.Enums;
+using Core.Exceptions;
 using Core.Models;
 using DataAccess.Entities;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
@@ -15,26 +17,42 @@ namespace DataAccess.Repository
     public class UserRepository : IUserRepository
     {
         private readonly LearningCoursesDbContext _context;
-        public UserRepository(LearningCoursesDbContext context)
+        private readonly IEmailCheckService _checkService;
+        public UserRepository(LearningCoursesDbContext context, IEmailCheckService checkService)
         {
             _context = context;
+            _checkService = checkService;
         }
         public async Task Add(User user)
         {
-            RoleEntity[] roleEntities = new RoleEntity[user.Roles.Length];
-            for (int i = 0; i < user.Roles.Length; i++) {
-                roleEntities[i] = await _context.Roles.SingleOrDefaultAsync(r => r.Id == (int)user.Roles[i]) ?? throw new InvalidOperationException();
-            }
-            var userEntity = new UserEntity()
+            try
             {
-                Id = user.Id,
-                Username = user.Username,
-                PasswordHash = user.PasswordHash,
-                Email = user.Email,
-                Roles = roleEntities
-            };
-            await _context.Users.AddAsync(userEntity);
-            await _context.SaveChangesAsync();
+                if (_checkService.EmailIsValid(user.Email) == false) throw new NotValidEmailException("Not Found your Email");
+                RoleEntity[] roleEntities = new RoleEntity[user.Roles.Length];
+                for (int i = 0; i < user.Roles.Length; i++)
+                {
+                    roleEntities[i] = await _context.Roles.SingleOrDefaultAsync(r => r.Id == (int)user.Roles[i]) ?? throw new InvalidOperationException();
+                }
+                var userEntity = new UserEntity()
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    PasswordHash = user.PasswordHash,
+                    Email = user.Email,
+                    Roles = roleEntities
+                };
+                await _context.Users.AddAsync(userEntity);
+                await _context.SaveChangesAsync();
+            }
+            catch (NotValidEmailException ex)
+            {
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
         public async Task<User> GetByEmail(string email)
         {

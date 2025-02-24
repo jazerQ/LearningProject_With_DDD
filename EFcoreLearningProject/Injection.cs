@@ -30,6 +30,7 @@ namespace EFcoreLearningProject
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ILessonService, LessonService>();
             services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            services.AddScoped<IEmailCheckService, EmailCheckService>();
             return services;
         }
     }

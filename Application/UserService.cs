@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Abstractions.ForRepositories;
 using Core.Enums;
+using Core.Exceptions;
 using Core.Models;
 using Infrastructure;
 
@@ -23,12 +24,23 @@ namespace Application
         }
         public async Task Register(string username, string email, string password,params Role[] role) 
         {
-            var user = User.Create(Guid.NewGuid(), username, _passwordHasherService.Generate(password), email, role);
-            if (user.IsFailure) 
+            try
             {
-                throw new Exception(user.Error);
+                var user = User.Create(Guid.NewGuid(), username, _passwordHasherService.Generate(password), email, role);
+                if (user.IsFailure)
+                {
+                    throw new Exception(user.Error);
+                }
+                await _userRepository.Add(user.Value);
             }
-            await _userRepository.Add(user.Value);
+            catch (NotValidEmailException ex)
+            {
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                throw;
+            }
         }
         public async Task<string> Login(string email, string password) 
         {
