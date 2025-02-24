@@ -16,5 +16,6 @@ namespace DataAccess.Repository
         Task UpdateValueSecondMethod(Guid id, Guid authorId, string title, string description, decimal price);
         Task WriteValue(Guid id, Guid authorId, string title, string description, decimal price);
         Task JoinToCourse(Guid courseId, Guid userId);
+        Task<CourseDTO> GetMyManagedCourse(Guid userId);
     }
 }

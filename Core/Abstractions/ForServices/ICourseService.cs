@@ -12,5 +12,6 @@ namespace Application
         Task UpdateAsync(Guid id, Guid authorId, string title, string description, decimal price);
         Task WriteAsync(Guid id, Guid authorId, string title, string description, decimal price);
         Task JoinToCourse(Guid courseId, Guid userId);
+        Task<CourseDTO> GetManagedCourse(Guid userId);
     }
 }

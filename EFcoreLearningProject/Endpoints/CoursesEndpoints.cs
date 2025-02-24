@@ -16,6 +16,7 @@ namespace EFcoreLearningProject.Endpoints
             group.MapPost("", CoursesEndpoints.Write).RequirePermissions(Permission.Create);
             group.MapGet("", CoursesEndpoints.Get).RequirePermissions(Permission.Read);
             group.MapPost("/Join", CoursesEndpoints.JoinToCourse).RequirePermissions(Permission.JoinToCourse);
+            group.MapGet("/Managed", CoursesEndpoints.GetManagedCourse).RequirePermissions(Permission.Create);
             return app;
         }
         public static async Task<IResult> Get(ICourseService courseService) 
@@ -65,6 +66,24 @@ namespace EFcoreLearningProject.Endpoints
                 return Results.BadRequest(ex.Message);
             }
             catch (AlreadyExistException ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+            catch (Exception ex) 
+            {
+                return Results.BadRequest(ex.Message);
+            }
+        }
+        public static async Task<IResult> GetManagedCourse(ICourseService courseService, HttpContext context) 
+        {
+            try
+            {
+                var authorIdClaim = context.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.UserId);
+                if (authorIdClaim == null || !Guid.TryParse(authorIdClaim.Value, out Guid authorId)) return Results.BadRequest("you`re not admin!");
+                var myCourse = await courseService.GetManagedCourse(authorId);
+                return Results.Ok(myCourse);
+            }
+            catch (EntityNotFoundException ex)
             {
                 return Results.BadRequest(ex.Message);
             }

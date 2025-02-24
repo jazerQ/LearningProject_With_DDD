@@ -76,5 +76,21 @@ namespace Application
                 throw;
             }
         }
+        public async Task<CourseDTO> GetManagedCourse(Guid userId) 
+        {
+            try
+            {
+                CourseDTO courseDTO = await _courseRepository.GetMyManagedCourse(userId);
+                return courseDTO;
+            }
+            catch (EntityNotFoundException ex)
+            {
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                throw;
+            }
+        }
     }
 }

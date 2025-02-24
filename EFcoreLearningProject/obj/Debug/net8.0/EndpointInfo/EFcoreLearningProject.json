@@ -60,6 +60,18 @@
         }
       }
     },
+    "/Courses/minimal/Managed": {
+      "get": {
+        "tags": [
+          "CoursesEndpoints"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/get": {
       "get": {
         "tags": [
