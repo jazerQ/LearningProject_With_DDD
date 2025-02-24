@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.DTO;
+using Core.Exceptions;
 using Core.Models.EducationPlatform;
 using DataAccess.Entities;
 using Infrastructure;
@@ -36,6 +38,7 @@ namespace DataAccess.Repository
             }
             var lesson = new LessonEntity()
             {
+                Id = Guid.NewGuid(),
                 Title = title,
                 Description = description,
                 LessonText = lessonText,
@@ -50,5 +53,55 @@ namespace DataAccess.Repository
             var lessons = await _context.Lessons.Where(l => l.CourseId == courseId).Select(l => l).ToListAsync();
             return lessons;
         }
+        private async Task<bool> IsOwnLesson(Guid courseId, Guid lessonId) 
+        {
+            return await _context.Lessons.Where(l => l.Id == lessonId && l.CourseId == courseId).SingleOrDefaultAsync() != null;
+        }
+        public async Task Update(Guid lessonId, string title, string description, string lessonText, Guid courseId)
+        {
+            try
+            {
+                if (await IsOwnLesson(courseId, lessonId) == false) throw new NotYourLessonException($"курс с id: {courseId} вам не доступен, так как вы не являетесь автором курса");
+                await _context.Lessons.Where(l => l.CourseId == courseId && l.Id == lessonId).ExecuteUpdateAsync(l => l.SetProperty(ls => ls.Title, title)
+                                                                                             .SetProperty(ls => ls.Description, description)
+                                                                                             .SetProperty(ls => ls.LessonText, lessonText));
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task Delete(Guid lessonId,Guid courseId) 
+        {
+            try
+            {
+                if (await IsOwnLesson(courseId, lessonId) == false) throw new NotYourLessonException($"курс с id: {courseId} вам не доступен, так как вы не являетесь автором курса");
+                await _context.Lessons.Where(l => l.Id == lessonId && l.CourseId == courseId).ExecuteDeleteAsync();
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task<LessonDTO> GetLessonById(Guid lessonId) 
+        {
+            try
+            {
+                return await _context.Lessons.Where(l => l.Id == lessonId).Select(c => new LessonDTO { Id = lessonId, Description = c.Description, LessonText = c.LessonText, Title = c.Title }).SingleOrDefaultAsync() ?? throw new EntityNotFoundException($"NotFound lesson with id \"{lessonId}\"");
+            }
+            catch (EntityNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
     }
 }

@@ -162,6 +162,77 @@
     ]
   },
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.LessonEndpoints",
+    "Method": "Update",
+    "RelativePath": "Lessons/minimal/{id:Guid}",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "requestLesson",
+        "Type": "EFcoreLearningProject.ContractsForEducationPlatform.RequestLesson",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EFcoreLearningProject.Endpoints.LessonEndpoints",
+    "Method": "Delete",
+    "RelativePath": "Lessons/minimal/{id:Guid}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EFcoreLearningProject.Endpoints.LessonEndpoints",
+    "Method": "GetById",
+    "RelativePath": "Lessons/minimal/{id:Guid}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EFcoreLearningProject.Endpoints.UsersEndpoints",
     "Method": "Login",
     "RelativePath": "login",
