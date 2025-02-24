@@ -37,6 +37,29 @@
         }
       }
     },
+    "/Courses/minimal/Join": {
+      "post": {
+        "tags": [
+          "CoursesEndpoints"
+        ],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/get": {
       "get": {
         "tags": [

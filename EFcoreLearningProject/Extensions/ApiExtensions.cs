@@ -44,6 +44,7 @@ namespace EFcoreLearningProject.Extensions
                     options.AddPolicy("Create", policy => policy.Requirements.Add(new PermissionRequirement(Permission.Create)));
                     options.AddPolicy("Update", policy => policy.Requirements.Add(new PermissionRequirement(Permission.Update)));
                     options.AddPolicy("Delete", policy => policy.Requirements.Add(new PermissionRequirement(Permission.Delete)));
+                    options.AddPolicy("JoinToCourse", policy => policy.Requirements.Add(new PermissionRequirement(Permission.JoinToCourse)));
                 });
             
         }

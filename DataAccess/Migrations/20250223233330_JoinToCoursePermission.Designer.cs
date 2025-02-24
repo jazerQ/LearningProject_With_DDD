@@ -3,6 +3,7 @@ using System;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(LearningCoursesDbContext))]
-    partial class LearningCoursesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250223233330_JoinToCoursePermission")]
+    partial class JoinToCoursePermission
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
@@ -54,18 +57,8 @@ namespace DataAccess.Migrations
                         },
                         new
                         {
-                            RoleId = 1,
-                            PermissionId = 5
-                        },
-                        new
-                        {
                             RoleId = 2,
                             PermissionId = 2
-                        },
-                        new
-                        {
-                            RoleId = 2,
-                            PermissionId = 5
                         });
                 });
 

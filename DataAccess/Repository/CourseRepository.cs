@@ -105,7 +105,7 @@ namespace DataAccess.Repository
             AuthorEntity authorEntity = new AuthorEntity()
             {
                 Id = authorId,
-                Username = user.Username, // ТУТ КОСТЫЛЬ!
+                Username = user.Username, 
                 CourseId = id
             };
             CourseEntity course = new CourseEntity()
@@ -144,6 +144,42 @@ namespace DataAccess.Repository
         public async Task DeleteEntity(Guid id, Guid authorId)
         {
             await _context.Courses.Where(c => (c.Id == id && c.AuthorId == authorId)).ExecuteDeleteAsync();
+        }
+        public async Task JoinToCourse(Guid courseId, Guid userId) 
+        {
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId) ?? throw new EntityNotFoundException("I cant found this user");
+                var student = await _context.Students.Include(s => s.Courses).FirstOrDefaultAsync(s => s.Id == userId);
+                if (student == null)
+                {
+                    StudentEntity newStudent = new StudentEntity { Id = userId, Username = user.Username };
+                    await _context.Students.AddAsync(newStudent);
+                    await _context.SaveChangesAsync();
+                    student = newStudent;
+                }
+                if (student.Courses.Any(c => c.Id == courseId))
+                {
+                    throw new AlreadyExistException($"{user.Username} with id: {user.Id} Already consist in this course {courseId}");
+                }
+                var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId) ?? throw new EntityNotFoundException("I cant found this course");
+                student.Courses.Add(course);
+                course.Students.Add(student);
+                await _context.SaveChangesAsync();
+            }
+            catch (EntityNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            catch (AlreadyExistException ex)
+            {
+                throw;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 

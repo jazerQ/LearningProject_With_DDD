@@ -56,5 +56,25 @@ namespace Application
         {
             await _courseRepository.DeleteEntity(id, authorId);
         }
+        public async Task JoinToCourse(Guid courseId, Guid userId) 
+        {
+            try
+            {
+                await _courseRepository.JoinToCourse(courseId, userId);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                throw;
+
+            }
+            catch (AlreadyExistException ex) 
+            {
+                throw;
+            }
+            catch(Exception ex) 
+            {
+                throw;
+            }
+        }
     }
 }
