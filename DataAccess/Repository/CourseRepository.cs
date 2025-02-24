@@ -98,7 +98,6 @@ namespace DataAccess.Repository
                                 .Take(pageSize)
                                 .ToListAsync();
         }
-
         public async Task WriteValue(Guid id, Guid authorId, string title, string description, decimal price)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == authorId) ?? throw new InvalidOperationException("User Not Found");

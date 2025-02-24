@@ -21,6 +21,7 @@ namespace EFcoreLearningProject
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.AddScoped<IPasswordHasherService, PasswordHasherService>();
             services.AddScoped<UserService>();
+            services.AddScoped<IMailSenderService, MailSenderService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();

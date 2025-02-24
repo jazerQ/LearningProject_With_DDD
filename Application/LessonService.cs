@@ -11,6 +11,7 @@ namespace Application
     public class LessonService : ILessonService
     {
         private readonly ILessonRepository _lessonRepository;
+        
         public LessonService(ILessonRepository lessonRepository)
         {
             _lessonRepository = lessonRepository;
