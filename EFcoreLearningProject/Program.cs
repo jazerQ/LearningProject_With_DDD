@@ -7,11 +7,15 @@ using DataAccess.Repository;
 using EFcoreLearningProject;
 using EFcoreLearningProject.Endpoints;
 using EFcoreLearningProject.Extensions;
+using EFcoreLearningProject.LogInfo;
+using EFcoreLearningProject.Middlewares;
 using Infrastructure;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
+
+StaticResetLogInfo.Reset();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -73,7 +78,23 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
+app.MapGet("getSuperHeader",(HttpContext context) => 
+{
+    if (context.Request.Headers.Keys.FirstOrDefault(k => k == "X-My-Custom-Header") == null)
+    {
+        context.Response.Headers.Append("X-My-Custom-Header", "frefre");
+    }
+    return Results.Ok();
+});
+app.Use(async (context, next) =>
+{
+    foreach(var pair in context.Request.Cookies)
+    {
+        context.Request.Headers[pair.Key] = pair.Value;
+    }
+    await next();
+});
+app.UseLog();
 app.MapGet("get", () => {
     return Results.Ok("Hellp World");
 }).RequirePermissions(Permission.Read);
@@ -88,5 +109,14 @@ app.MapPut("put", () =>
 app.MapDelete("delete", () =>
 {
     return Results.Ok("ты обновил что-то");
+});
+app.Use(async (context, next) => {
+    if(!context.Request.Headers.ContainsKey("X-My-Custom-Header"))
+    {
+        context.Response.StatusCode = 400;
+        await context.Response.WriteAsync("У тебя нет Header");
+        return;
+    }
+    await next();
 });
 app.Run();

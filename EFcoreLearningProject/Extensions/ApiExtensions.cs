@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Core.Enums;
+using EFcoreLearningProject.Middlewares;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,11 @@ namespace EFcoreLearningProject.Extensions
 {
     public static class ApiExtensions
     {
-
+        public static IApplicationBuilder UseLog(this IApplicationBuilder app) 
+        {
+            app.UseMiddleware<LoggerMiddleware>();
+            return app;
+        }
         public static void AddApiAuthentication(this IServiceCollection services, IOptions<JwtOptions> jwtOptions)
         {
             services.AddAuthentication(options => {
