@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EFcoreLearningProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1981334697121af35be7a7cdc2a5ee0f1add7a9b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a4d1ca2183e8a8b79adc967b2a9ff80b4e5bf85")]
 [assembly: System.Reflection.AssemblyProductAttribute("EFcoreLearningProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EFcoreLearningProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

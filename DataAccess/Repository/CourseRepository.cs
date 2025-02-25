@@ -268,6 +268,7 @@ namespace DataAccess.Repository
         {
             try
             {
+                await _context.Authors.Where(a => a.CourseId == courseId).ExecuteDeleteAsync();
                 await _context.Courses.Where(c => c.Id == courseId).ExecuteDeleteAsync();
             }
             catch (Exception ex) 
