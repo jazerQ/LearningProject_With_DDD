@@ -17,5 +17,8 @@ namespace DataAccess.Repository
         Task WriteValue(Guid id, Guid authorId, string title, string description, decimal price);
         Task JoinToCourse(Guid courseId, Guid userId);
         Task<CourseDTO> GetMyManagedCourse(Guid userId);
+        Task<List<CourseDTO>> GetMyCourses(Guid userId);
+        Task Update(Guid courseId, string title, string descriptions, decimal price);
+        Task Delete(Guid courseId);
     }
 }

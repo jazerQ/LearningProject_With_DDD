@@ -76,6 +76,60 @@
     ]
   },
   {
+    "ContainingType": "EFcoreLearningProject.Endpoints.CoursesEndpoints",
+    "Method": "Update",
+    "RelativePath": "Courses/minimal/Managed",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestCourse",
+        "Type": "EFcoreLearningProject.ContractsForEducationPlatform.RequestCourse",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EFcoreLearningProject.Endpoints.CoursesEndpoints",
+    "Method": "Delete",
+    "RelativePath": "Courses/minimal/Managed",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EFcoreLearningProject.Endpoints.CoursesEndpoints",
+    "Method": "GetMyCourses",
+    "RelativePath": "Courses/minimal/My",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Program\u002B\u003C\u003Ec",
     "Method": "\u003C\u003CMain\u003E$\u003Eb__0_5",
     "RelativePath": "delete",

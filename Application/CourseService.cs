@@ -92,5 +92,35 @@ namespace Application
                 throw;
             }
         }
+        public async Task<List<CourseDTO>> GetMyCourses(Guid userId) 
+        {
+            try
+            {
+                return await _courseRepository.GetMyCourses(userId);
+            } catch (Exception ex) {
+                throw;
+            }
+        }
+        public async Task Update(Guid courseId, string title, string description, decimal price)
+        {
+            try
+            {
+                await _courseRepository.Update(courseId, title, description, price);
+            }catch(Exception ex) 
+            {
+                throw;
+            }
+        }
+        public async Task Delete(Guid courseId)
+        {
+            try
+            {
+                await _courseRepository.Delete(courseId);
+            }
+            catch (Exception ex) 
+            {
+                throw;
+            }
+        }
     }
 }

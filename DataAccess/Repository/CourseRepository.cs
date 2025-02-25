@@ -8,6 +8,7 @@ using Core.Exceptions;
 using Core.Models.EducationPlatform;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace DataAccess.Repository
 {
@@ -217,6 +218,57 @@ namespace DataAccess.Repository
             {
                 Console.WriteLine(ex.Message);
                 throw;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task<List<CourseDTO>> GetMyCourses(Guid userId)
+        {
+            try
+            {
+                return await _context.Courses.Include(c => c.Students).Where(c => c.Students.Any(s => s.Id == userId)).Select(c => new CourseDTO
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Author = _context.Authors
+                                    .Where(a => a.CourseId == c.Id)
+                                    .Select(a => new AuthorDTO
+                                    {
+                                        Id = a.Id,
+                                        Username = a.Username
+                                    }).SingleOrDefault(),
+                }).ToListAsync();
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task Update(Guid courseId, string title, string descriptions, decimal price)
+        {
+            try
+            {
+                await _context.Courses.Where(c => c.Id == courseId).ExecuteUpdateAsync(c => c.SetProperty(cr => cr.Title, title)
+                                                                                             .SetProperty(cr => cr.Description, descriptions)
+                                                                                             .SetProperty(cr => cr.Price, price));
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task Delete(Guid courseId) 
+        {
+            try
+            {
+                await _context.Courses.Where(c => c.Id == courseId).ExecuteDeleteAsync();
             }
             catch (Exception ex) 
             {
