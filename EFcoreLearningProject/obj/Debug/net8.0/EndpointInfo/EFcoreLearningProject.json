@@ -114,18 +114,6 @@
         }
       }
     },
-    "/getSuperHeader": {
-      "get": {
-        "tags": [
-          "EFcoreLearningProject"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/get": {
       "get": {
         "tags": [

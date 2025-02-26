@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-
+builder.Services.AddMemoryCache();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
@@ -37,17 +37,6 @@ builder.Configuration.AddJsonFile("jwtoptions.json");
 builder.Services.Configure<JwtOptions>(builder.Configuration);
 builder.Services.Configure<AuthorizationOptions>(builder.Configuration.GetSection("AuthorizationOptions"));
 builder.Services.AddApiAuthentication(builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>());
-//builder.Services.AddScoped<IImageService, ImageService>();
-//builder.Services.AddScoped<INewsService, NewsService>();
-//builder.Services.AddScoped<INewsRepository, NewsRepository>();
-//builder.Services.AddScoped<IImageRepository, ImageRepository>();
-
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
-//builder.Services.AddScoped<IJwtProvider, JwtProvider>();
-//builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
-//builder.Services.AddScoped<UserService>();
-//builder.Services.AddScoped<ICourseService, CourseService>();
-//builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddAllDependency();
 var app = builder.Build();
 
@@ -65,7 +54,6 @@ app.UseCookiePolicy(new CookiePolicyOptions {
     HttpOnly = HttpOnlyPolicy.Always,
     Secure = CookieSecurePolicy.Always
 });
-
 app.MapUsersEndpoints();
 
 app.MapCoursesEndpoint();
@@ -78,45 +66,32 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("getSuperHeader",(HttpContext context) => 
-{
-    if (context.Request.Headers.Keys.FirstOrDefault(k => k == "X-My-Custom-Header") == null)
-    {
-        context.Response.Headers.Append("X-My-Custom-Header", "frefre");
-    }
-    return Results.Ok();
-});
-app.Use(async (context, next) =>
-{
-    foreach(var pair in context.Request.Cookies)
-    {
-        context.Request.Headers[pair.Key] = pair.Value;
-    }
-    await next();
-});
-app.UseLog();
 app.MapGet("get", () => {
     return Results.Ok("Hellp World");
 }).RequirePermissions(Permission.Read);
+
 app.MapPost("post", () => 
 {
     return Results.Ok("Ты создал что-то");
 }).RequirePermissions(Permission.Create);
+
 app.MapPut("put", () =>
   {
       return Results.Ok("Ты обновил что-то");
   }).RequirePermissions(Permission.Update);
+
 app.MapDelete("delete", () =>
 {
     return Results.Ok("ты обновил что-то");
 });
+
 app.Use(async (context, next) => {
-    if(!context.Request.Headers.ContainsKey("X-My-Custom-Header"))
-    {
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsync("У тебя нет Header");
-        return;
-    }
-    await next();
+    context.Request.EnableBuffering();
+    await next(context);
 });
+
+app.UseLog();
+
+app.UseIpInfo();
+
 app.Run();

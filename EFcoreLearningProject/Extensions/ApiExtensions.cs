@@ -15,6 +15,11 @@ namespace EFcoreLearningProject.Extensions
             app.UseMiddleware<LoggerMiddleware>();
             return app;
         }
+        public static IApplicationBuilder UseIpInfo(this IApplicationBuilder app) 
+        {
+            app.UseMiddleware<IpCheckMiddleware>();
+            return app;
+        }
         public static void AddApiAuthentication(this IServiceCollection services, IOptions<JwtOptions> jwtOptions)
         {
             services.AddAuthentication(options => {

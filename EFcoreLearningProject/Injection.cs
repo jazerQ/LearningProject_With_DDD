@@ -5,6 +5,7 @@ using Core.Abstractions.ForServices;
 using DataAccess.Repository;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace EFcoreLearningProject
 {
@@ -16,7 +17,6 @@ namespace EFcoreLearningProject
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
-
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.AddScoped<IPasswordHasherService, PasswordHasherService>();
