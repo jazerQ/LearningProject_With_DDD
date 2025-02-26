@@ -17,7 +17,7 @@ namespace EFcoreLearningProject.Extensions
         }
         public static IApplicationBuilder UseIpInfo(this IApplicationBuilder app) 
         {
-            app.UseMiddleware<IpCheckMiddleware>();
+            app.UseMiddleware<IpCheckMiddlewareWithMethod>();
             return app;
         }
         public static void AddApiAuthentication(this IServiceCollection services, IOptions<JwtOptions> jwtOptions)

@@ -1,6 +1,6 @@
-Method: POST
-Display Url: https://localhost:7208/post
-Encoded Url: https://localhost:7208/post
+Method: GET
+Display Url: https://localhost:7208/get
+Encoded Url: https://localhost:7208/get
 Header Consist Of:
 Accept   -   */*
 Host   -   localhost:7208
@@ -8,134 +8,7 @@ User-Agent   -   Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (K
 Accept-Encoding   -   gzip, deflate, br, zstd
 Accept-Language   -   ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
 Cookie   -   itsExactlyNotJwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmY5ODhkNi01MTgwLTRhYjEtYWRmZS04OTY0YTM5NjVmM2MiLCJleHAiOjE3NDA2NDI1ODJ9.JFOsgJNgF3tVcRh56W_kAwJ8BUPbLjqV92BbPWRDelQ
-Origin   -   https://localhost:7208
 Referer   -   https://localhost:7208/swagger/index.html
-Content-Length   -   0
-sec-ch-ua-platform   -   "Windows"
-sec-ch-ua   -   "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
-sec-ch-ua-mobile   -   ?0
-sec-fetch-site   -   same-origin
-sec-fetch-mode   -   cors
-sec-fetch-dest   -   empty
-priority   -   u=1, i
-
-
-
-
-
-Method: POST
-Display Url: https://localhost:7208/post
-Encoded Url: https://localhost:7208/post
-Header Consist Of:
-Accept   -   */*
-Host   -   localhost:7208
-User-Agent   -   Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
-Accept-Encoding   -   gzip, deflate, br, zstd
-Accept-Language   -   ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Cookie   -   itsExactlyNotJwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmY5ODhkNi01MTgwLTRhYjEtYWRmZS04OTY0YTM5NjVmM2MiLCJleHAiOjE3NDA2NDI1ODJ9.JFOsgJNgF3tVcRh56W_kAwJ8BUPbLjqV92BbPWRDelQ
-Origin   -   https://localhost:7208
-Referer   -   https://localhost:7208/swagger/index.html
-Content-Length   -   0
-sec-ch-ua-platform   -   "Windows"
-sec-ch-ua   -   "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
-sec-ch-ua-mobile   -   ?0
-sec-fetch-site   -   same-origin
-sec-fetch-mode   -   cors
-sec-fetch-dest   -   empty
-priority   -   u=1, i
-
-
-
-
-
-Method: POST
-Display Url: https://localhost:7208/post
-Encoded Url: https://localhost:7208/post
-Header Consist Of:
-Accept   -   */*
-Host   -   localhost:7208
-User-Agent   -   Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
-Accept-Encoding   -   gzip, deflate, br, zstd
-Accept-Language   -   ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Cookie   -   itsExactlyNotJwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmY5ODhkNi01MTgwLTRhYjEtYWRmZS04OTY0YTM5NjVmM2MiLCJleHAiOjE3NDA2NDI1ODJ9.JFOsgJNgF3tVcRh56W_kAwJ8BUPbLjqV92BbPWRDelQ
-Origin   -   https://localhost:7208
-Referer   -   https://localhost:7208/swagger/index.html
-Content-Length   -   0
-sec-ch-ua-platform   -   "Windows"
-sec-ch-ua   -   "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
-sec-ch-ua-mobile   -   ?0
-sec-fetch-site   -   same-origin
-sec-fetch-mode   -   cors
-sec-fetch-dest   -   empty
-priority   -   u=1, i
-
-
-
-
-
-Method: POST
-Display Url: https://localhost:7208/post
-Encoded Url: https://localhost:7208/post
-Header Consist Of:
-Accept   -   */*
-Host   -   localhost:7208
-User-Agent   -   Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
-Accept-Encoding   -   gzip, deflate, br, zstd
-Accept-Language   -   ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Cookie   -   itsExactlyNotJwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmY5ODhkNi01MTgwLTRhYjEtYWRmZS04OTY0YTM5NjVmM2MiLCJleHAiOjE3NDA2NDI1ODJ9.JFOsgJNgF3tVcRh56W_kAwJ8BUPbLjqV92BbPWRDelQ
-Origin   -   https://localhost:7208
-Referer   -   https://localhost:7208/swagger/index.html
-Content-Length   -   0
-sec-ch-ua-platform   -   "Windows"
-sec-ch-ua   -   "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
-sec-ch-ua-mobile   -   ?0
-sec-fetch-site   -   same-origin
-sec-fetch-mode   -   cors
-sec-fetch-dest   -   empty
-priority   -   u=1, i
-
-
-
-
-
-Method: POST
-Display Url: https://localhost:7208/post
-Encoded Url: https://localhost:7208/post
-Header Consist Of:
-Accept   -   */*
-Host   -   localhost:7208
-User-Agent   -   Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
-Accept-Encoding   -   gzip, deflate, br, zstd
-Accept-Language   -   ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Cookie   -   itsExactlyNotJwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmY5ODhkNi01MTgwLTRhYjEtYWRmZS04OTY0YTM5NjVmM2MiLCJleHAiOjE3NDA2NDI1ODJ9.JFOsgJNgF3tVcRh56W_kAwJ8BUPbLjqV92BbPWRDelQ
-Origin   -   https://localhost:7208
-Referer   -   https://localhost:7208/swagger/index.html
-Content-Length   -   0
-sec-ch-ua-platform   -   "Windows"
-sec-ch-ua   -   "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
-sec-ch-ua-mobile   -   ?0
-sec-fetch-site   -   same-origin
-sec-fetch-mode   -   cors
-sec-fetch-dest   -   empty
-priority   -   u=1, i
-
-
-
-
-
-Method: POST
-Display Url: https://localhost:7208/post
-Encoded Url: https://localhost:7208/post
-Header Consist Of:
-Accept   -   */*
-Host   -   localhost:7208
-User-Agent   -   Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
-Accept-Encoding   -   gzip, deflate, br, zstd
-Accept-Language   -   ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Cookie   -   itsExactlyNotJwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmY5ODhkNi01MTgwLTRhYjEtYWRmZS04OTY0YTM5NjVmM2MiLCJleHAiOjE3NDA2NDI1ODJ9.JFOsgJNgF3tVcRh56W_kAwJ8BUPbLjqV92BbPWRDelQ
-Origin   -   https://localhost:7208
-Referer   -   https://localhost:7208/swagger/index.html
-Content-Length   -   0
 sec-ch-ua-platform   -   "Windows"
 sec-ch-ua   -   "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
 sec-ch-ua-mobile   -   ?0

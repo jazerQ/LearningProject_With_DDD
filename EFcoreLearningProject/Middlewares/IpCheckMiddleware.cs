@@ -32,7 +32,7 @@ namespace EFcoreLearningProject.Middlewares
             }
             value.Add(DateTime.Now);
             _memoryCache.Set(ip, value, _memoryCacheOptions);
-            Console.WriteLine($"IP: {ip} | Запрос № {value.Count}| Время: {DateTime.UtcNow}");
+            Console.WriteLine($"IP: {ip} | Запрос № {value.Count - 1}| Время: {DateTime.UtcNow}");
             
             await _next(context);
         }
